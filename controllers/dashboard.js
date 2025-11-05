@@ -1,5 +1,39 @@
+import Courses from "../models/courses.js";
+import TeamMembers from "../models/teamMember.js";
 import FeaturedImage from "../models/featuredImages.js";
 import { deleteFromCloudinary, uploadToCloudinary } from "../utils/cloudinary.js";
+import University from "../models/university.js";
+import AbroadUniversity from "../models/abroadUniversity.js";
+import Newsletter from "../models/newsletter.js";
+import Blog from "../models/blog.js";
+import PreviousYearQuestion from "../models/pyqs.js";
+
+export const getDashboardStats = async (req, res) => {
+    try {
+        const courses = await Courses.countDocuments()
+        const imatUniversities = await University.countDocuments();
+        const abroadUniversities = await AbroadUniversity.countDocuments();
+        const blogs = await Blog.countDocuments();
+        const teamMembers = await TeamMembers.countDocuments();
+        const newsletters = await Newsletter.countDocuments();
+        const questions = await PreviousYearQuestion.countDocuments();
+        const featuredImages = await FeaturedImage.countDocuments();
+        res.status(200).json({
+            success: true, data: {
+                courses,
+                imatUniversities,
+                abroadUniversities,
+                blogs,
+                teamMembers,
+                newsletters,
+                questions,
+                featuredImages
+            }
+        });
+    } catch (error) {
+        res.status(500).json({ message: 'Server error' });
+    }
+}
 
 export const fetchFeaturedImages = async (req, res) => {
     try {

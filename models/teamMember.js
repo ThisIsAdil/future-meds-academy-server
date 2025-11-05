@@ -8,10 +8,17 @@ const teamMemberSchema = new mongoose.Schema({
   name: { type: String, required: true },
   designation: { type: String, required: true },
   about: String,
-  videoIntroductionUrl: String,
-  enrolledCourses: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Course' }],
+  videoIntroductionUrl: String
+}, {
+  toJSON: { virtuals: true },
+  toObject: { virtuals: true }
+});
+
+teamMemberSchema.virtual('enrolledCourses', {
+  ref: 'Course',
+  localField: '_id',
+  foreignField: 'instructors'
 });
 
 const Team = mongoose.model('Team-Member', teamMemberSchema);
-
 export default Team;
