@@ -4,7 +4,7 @@ export const authenticateAdmin = (req, res, next) => {
     const token = req.cookies.admin_token;
 
     if (!token) {
-        return res.status(401).json({ message: 'No token provided' });
+        return res.status(401).json({ message: 'Forbidden' });
     }
 
     try {
@@ -14,6 +14,6 @@ export const authenticateAdmin = (req, res, next) => {
         }
         next();
     } catch (err) {
-        return res.status(401).json({ message: 'Invalid token' });
+        return res.status(401).json({ message: 'Forbidden' });
     }
 };

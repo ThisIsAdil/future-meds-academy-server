@@ -20,7 +20,8 @@ router.post('/', async (req, res) => {
     res.cookie('admin_token', token, {
         httpOnly: true,
         secure: true,
-        sameSite: 'strict',
+        sameSite: 'none',
+        domain: '.futuremedsacademy.com',
         maxAge: 60 * 60 * 1000 // 1h
     });
 
