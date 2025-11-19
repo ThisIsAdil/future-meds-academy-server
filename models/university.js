@@ -10,6 +10,7 @@ const universitySchema = new mongoose.Schema({
         publicId: String
     },
     name: { type: String, required: true },
+    about: String,
     location: { type: String, required: true },
     tuitionFees: String,
     programLength: String,

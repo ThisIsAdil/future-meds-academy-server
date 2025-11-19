@@ -1,5 +1,5 @@
 import express from 'express';
-import { createUniversity, deleteUniversity, getAllUniversities, updateUniversity, updateYearlyData } from '../controllers/university.js';
+import { createUniversity, deleteUniversity, getAllUniversities, getUniversity, updateUniversity, updateYearlyData } from '../controllers/university.js';
 import { upload } from '../middlewares/multer.js';
 import { authenticateAdmin } from '../utils/auth.js';
 
@@ -8,6 +8,7 @@ const router = express.Router();
 // api/university/
 
 router.get('/', getAllUniversities);
+router.get('/:id', getUniversity);
 router.post('/create', authenticateAdmin,
     upload.fields([
         { name: 'logo', maxCount: 1 },
